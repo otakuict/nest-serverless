@@ -5,7 +5,7 @@ export class MessageController {
   constructor() {}
 
   @Get()
-  getExampleMessage(): string {
-     return 'Hello World!';
+  getExampleMessage(): object {
+    return { id: 1, name: 'otaku ict' };
   }
 }
