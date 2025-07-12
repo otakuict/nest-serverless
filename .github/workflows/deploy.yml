@@ -36,6 +36,6 @@ jobs:
 
       - name: Deploy with Serverless
         run: |
-          npx serverless deploy --stage dev
+           serverless deploy --stage dev
         env:
           SLS_TELEMETRY_DISABLED: 1
