@@ -1,9 +1,10 @@
+// src/lambda.ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import serverlessExpress from '@codegenie/serverless-express';
-import { Context, Handler, Callback } from 'aws-lambda';
+import { Handler, Context, Callback, APIGatewayProxyEvent } from 'aws-lambda';
 
-let server: Handler;
+let cachedHandler: Handler;
 
 async function bootstrap(): Promise<Handler> {
   const app = await NestFactory.create(AppModule);
@@ -12,7 +13,14 @@ async function bootstrap(): Promise<Handler> {
   return serverlessExpress({ app: expressApp });
 }
 
-export const handler = async (event, context) => {
-  const server = await bootstrapServer();
-  return proxy(server, event, context, 'PROMISE').promise;
+// Lambda entry point
+export const handler = async (
+  event: APIGatewayProxyEvent,
+  context: Context,
+  callback: Callback,
+) => {
+  if (!cachedHandler) {
+    cachedHandler = await bootstrap();
+  }
+  return cachedHandler(event, context, callback);
 };
