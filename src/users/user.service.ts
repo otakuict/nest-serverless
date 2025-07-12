@@ -20,7 +20,7 @@ export class UserService {
     const token: string = this.configService.getOrThrow('github.token');
 
     if (!token) {
-      throw new Error('GitHub token not set in GITHUB_TOKEN env var');
+      throw new Error('GitHub token not set in API_TOKEN env var');
     }
 
     this.githubApi = axios.create({
