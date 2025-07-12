@@ -7,6 +7,6 @@ export class AppController {
 
   @Get()
   getRoot(): string {
-    return 'Serverless Nest is working!';
+    return 'Serverless Nest is working!!';
   }
 }
