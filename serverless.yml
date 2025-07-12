@@ -26,18 +26,7 @@ functions:
           method: any
           cors: true
 
-package:
-  individually: true
-  patterns:
-    - '!node_modules/**'
-    - '!src/**'
-    - '!test/**'
-    - '!README.md'
-    - '!tsconfig.json'
-    - '!tsconfig.build.json'
-    - '!package-lock.json'
-    - '!serverless.yml'
-    - 'dist/**'
+
 
 plugins:
   - serverless-offline
