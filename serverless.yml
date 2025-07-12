@@ -1,0 +1,41 @@
+service: nest-serverless
+
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-southeast-1
+  stage: dev
+  memorySize: 512
+  timeout: 10
+
+functions:
+  api:
+    handler: dist/main.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: any
+          cors: true
+
+package:
+  individually: true
+  patterns:
+    - '!node_modules/**'
+    - '!src/**'
+    - '!test/**'
+    - '!README.md'
+    - '!tsconfig.json'
+    - '!tsconfig.build.json'
+    - '!package-lock.json'
+    - '!serverless.yml'
+    - 'dist/**'
+
+plugins:
+  - serverless-offline
+  - serverless-prune-plugin
+
+custom:
+  prune:
+    automatic: true
+    number: 3
