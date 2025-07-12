@@ -39,3 +39,8 @@ jobs:
            serverless deploy --stage dev
         env:
           SLS_TELEMETRY_DISABLED: 1
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ secrets.OWNER }}
+          REPO: ${{ secrets.REPO }}
+          BRANCH: ${{ secrets.BRANCH }}
+          GITHUB_PATH: ${{ secrets.GITHUB_PATH }}
