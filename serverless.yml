@@ -9,9 +9,9 @@ provider:
   timeout: 10
   environment:
     GITHUB_TOKEN: ${env:GITHUB_TOKEN}
-    GITHUB_OWNER: ${env:OWNER}
-    GITHUB_REPO: ${env:REPO}
-    GITHUB_BRANCH: ${env:BRANCH}
+    OWNER: ${env:OWNER}             # ✅ match expected key
+    REPO: ${env:REPO}
+    BRANCH: ${env:BRANCH}
   
 
   # ✅ IAM permissions to allow logging to CloudWatch
