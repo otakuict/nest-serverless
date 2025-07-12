@@ -13,7 +13,6 @@ export class UserService {
 
   constructor(private readonly configService: ConfigService) {
     this.owner = this.configService.getOrThrow('github.owner'); // e.g. your GitHub username or org
-    console.log('🚀 ~ UserService ~ constructor ~  this.owner:', this.owner);
     this.repo = this.configService.getOrThrow('github.repo'); // repo name
     this.branch = this.configService.getOrThrow('github.branch'); // branch name, default 'main'
     this.path = 'users.json';
@@ -49,14 +48,13 @@ export class UserService {
       }
 
       const decoded = Buffer.from(content, 'base64').toString('utf-8');
-      console.log('🚀 ~ UserService ~ getFileContent ~ decoded:', decoded);
+
       try {
         return JSON.parse(decoded);
       } catch {
         return decoded; // return raw string if not JSON
       }
     } catch (error) {
-      console.log('🚀 ~ UserService ~ getFileContent ~ error:', error);
       if (error.response?.status === 404) {
         throw new HttpException('File not found', HttpStatus.NOT_FOUND);
       }
@@ -76,7 +74,6 @@ export class UserService {
 
         sha = existing.data.sha;
       } catch (e) {
-        console.log('🚀 ~ UserService ~ e:', e);
         if (e.response?.status !== 404) {
           throw e;
         }

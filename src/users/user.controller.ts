@@ -19,10 +19,8 @@ export class UsersController {
 
   @Post()
   async addUser(@Body() newUser: User): Promise<any> {
-    console.log('🚀 ~ UsersController ~ addUser ~ newUser:', newUser);
     const users: User[] = await this.userService.getFileContent();
 
-    console.log('🚀 ~ UsersController ~ addUser ~ users:', users);
     users.push(newUser);
     return this.userService.createOrUpdateFile(users, `Add user ${newUser.id}`);
   }
